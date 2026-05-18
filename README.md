@@ -90,7 +90,8 @@ This assessment follows a structured penetration testing methodology:
 ## 📄 Final Report
 
 The complete consolidated assessment report is available as:
-📎 [`final-report.pdf`]([Earth roy_202510000014.pdf]([Earth roy_202510000014.pdf](https://github.com/user-attachments/files/27972424/Earth.roy_202510000014.pdf)
+📎 [`final-report.pdf`][Final report.pdf](https://github.com/user-attachments/files/27973922/Final.report.pdf)
+
 )
 )
 
