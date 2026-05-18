@@ -1,0 +1,70 @@
+# Web Application Assessment Summary
+
+## Room: OWASP Juice Shop (TryHackMe)
+
+---
+
+## Objective
+
+Assess the OWASP Juice Shop web application for common vulnerabilities as part of the simulated external penetration test for PosBuzz Retail Solutions. Juice Shop is an intentionally vulnerable application covering the OWASP Top 10.
+
+---
+
+## Methodology
+
+Manual testing and automated techniques were used to identify vulnerabilities across the application. Testing focused on:
+
+- Authentication and session management
+- Input validation and injection flaws
+- Access control weaknesses
+- Sensitive data exposure
+
+---
+
+## Key Findings
+
+### 1. SQL Injection (Login Bypass)
+- **Location:** Login page (`/#/login`)
+- **Payload:** `' OR 1=1--` in the email field
+- **Impact:** Authentication bypass — gained access to the admin account without valid credentials
+- **OWASP Category:** A03 – Injection
+
+### 2. Cross-Site Scripting (XSS)
+- **Location:** Search bar and product feedback fields
+- **Payload:** `<script>alert('XSS')</script>`
+- **Impact:** Reflected and stored XSS allowing session hijacking and phishing attacks against users
+- **OWASP Category:** A03 – Injection / A07 – XSS
+
+### 3. Broken Access Control
+- **Location:** Admin panel accessible via direct URL (`/#/administration`)
+- **Impact:** Unauthorized access to customer data, orders, and user management
+- **OWASP Category:** A01 – Broken Access Control
+
+### 4. Sensitive Data Exposure
+- **Location:** `/ftp` directory (unauthenticated)
+- **Impact:** Confidential files, backup data, and internal documents accessible without authentication
+- **OWASP Category:** A02 – Cryptographic Failures / Sensitive Data Exposure
+
+---
+
+## Security Impact
+
+The vulnerabilities identified in the Juice Shop application represent critical risks for a real retail platform like PosBuzz Retail Solutions. SQL injection enables complete authentication bypass and potential database exfiltration. Broken access control allows any user to access administrative functions. Together, these flaws could lead to full compromise of customer PII, payment data, and business-critical information.
+
+---
+
+## Remediation Recommendations
+
+1. **Parameterized queries / prepared statements** must replace all dynamic SQL construction to prevent injection.
+2. **Input validation and output encoding** should be enforced on all user-supplied data to prevent XSS.
+3. **Enforce access controls server-side** — never rely on client-side URL restrictions for admin areas.
+4. **Remove or restrict the `/ftp` directory** and ensure sensitive files are never publicly accessible.
+5. Implement a **Web Application Firewall (WAF)** as a defence-in-depth measure.
+6. Conduct **regular DAST/SAST scanning** and penetration testing as part of the SDLC.
+
+---
+
+## Screenshots
+
+-  SQL injection login bypass
+-  XSS payload execution
